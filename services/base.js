@@ -17,6 +17,10 @@ class Service {
   create(body) {
     return db[this.model].create(body)
   }
+
+  update(body, id) {
+    return db[this.model].update(body, { where: { id }})
+  }
 }
 
 module.exports = Service

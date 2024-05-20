@@ -77,6 +77,51 @@ main {
   color: #353535;
 }
 
+/* edit & delete button */
+
+.edit-delete {
+  width: 160px;
+  height: 40px;
+  background-color: #8d99ae;
+  border-radius: 10px;
+  border: 2px solid #353535;
+  position: absolute;
+  right: 30px;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  transition: 0.5s;
+}
+
+.edit-link,
+.delete-btn {
+  width: 50px;
+  font-size: 16px;
+  font-weight: 700;
+  text-decoration: none;
+  text-align: center;
+  color: #353535;
+  background-color: #34a0a4;
+  border-radius: 10px;
+  border: 2px solid #353535;
+}
+
+.edit-link {
+  background-color: #34a0a4;
+}
+
+.delete-btn {
+  background-color: #c9184a;
+}
+
+.edit-link:hover,
+.delete-btn:hover {
+  cursor: pointer;
+  filter: brightness(1.5);
+  color: black;
+  border: 2px solid black;
+}
+
 /* home.hbs */
 .searchbar {
   height: 50px;
@@ -174,32 +219,39 @@ td:first-child {
   text-wrap: nowrap;
 }
 
-/* create.hbs */
-.create-div {
+/* create.hbs & edit.hbs */
+
+.create-div,
+.edit-div {
   margin-bottom: 20px;
   display: flex;
 }
 
-.create-label {
+.create-label,
+.edit-label {
   width: 100px;
   text-align: center;
   text-wrap: nowrap;
 }
 
-.create-colon {
+.create-colon,
+.edit-colon {
   margin-right: 10px;
 }
 
-.create-input {
+.create-input,
+.edit-input {
   width: 100%;
 }
 
-.create-btn {
+.create-btn,
+.edit-btn {
   display: flex;
   justify-content: end;
 }
 
-.create-btn>button {
+.create-btn>button,
+.edit-btn>button {
   width: 60px;
   margin-left: 16px;
   border-radius: 10px;
@@ -208,15 +260,18 @@ td:first-child {
   transition: 0.5s;
 }
 
-.create-btn>button:hover {
+.create-btn>button:hover,
+.edit-btn>button:hover {
   cursor: pointer;
 }
 
-.create-input:valid {
+.create-input:valid,
+.edit-input:valid {
   border: 2px solid green;
 }
 
-.create-input:invalid {
+.create-input:invalid,
+.edit-input:invalid {
   border: 2px solid red;
 }
 

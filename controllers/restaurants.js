@@ -35,7 +35,6 @@ class RestaurantsController {
     try {
       const { name, name_en, category, image, location, phone, google_map, rating, description } =
         req.body
-        console.log(name, name_en, category)
       await restaurantsService.create({
         name,
         name_en,
@@ -54,9 +53,46 @@ class RestaurantsController {
     }
   }
 
+  async updateRestaurant(req, res) {
+    try {
+      const { name, name_en, category, image, location, phone, google_map, rating, description } =
+        req.body
+      const id = req.params.id
+      await restaurantsService.update(
+        {
+          name,
+          name_en,
+          category,
+          image,
+          location,
+          phone,
+          google_map,
+          rating,
+          description
+        },
+        id
+      )
+      res.redirect('/restaurants')
+    } catch (err) {
+      console.error('Error:', err)
+      res.status(500).send('Internal Server Error')
+    }
+  }
+
   renderCreatePage(req, res) {
     try {
       res.render('create')
+    } catch (err) {
+      console.error('Error:', err)
+      res.status(500).send('Internal Server Error')
+    }
+  }
+
+  async renderEditPage(req, res) {
+    try {
+      const id = req.params.id
+      const restaurant = await restaurantsService.getById(id)
+      res.render('edit', { restaurant })
     } catch (err) {
       console.error('Error:', err)
       res.status(500).send('Internal Server Error')
