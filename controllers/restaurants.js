@@ -18,13 +18,14 @@ class RestaurantsController {
 
   async getRestaurant(req, res) {
     try {
+      const editDelete = true
       const id = req.params.id
       const restaurant = await restaurantsService.getById(id)
       if (!restaurant) {
         res.status(404).send('Restaurant not found')
         return
       }
-      res.render('restaurant', { restaurant })
+      res.render('restaurant', { restaurant, editDelete })
     } catch (err) {
       console.error('Error:', err)
       res.status(500).send('Internal Server Error')
@@ -72,6 +73,17 @@ class RestaurantsController {
         },
         id
       )
+      res.redirect('/restaurants')
+    } catch (err) {
+      console.error('Error:', err)
+      res.status(500).send('Internal Server Error')
+    }
+  }
+
+  async deleteRestaurant(req, res) {
+    try {
+      const id = req.params.id
+      await restaurantsService.delete(id)
       res.redirect('/restaurants')
     } catch (err) {
       console.error('Error:', err)

@@ -95,6 +95,7 @@ main {
 
 .edit-link,
 .delete-btn {
+  padding: 1px 6px;
   width: 50px;
   font-size: 16px;
   font-weight: 700;

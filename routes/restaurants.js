@@ -7,4 +7,5 @@ router.get('/:id/edit', restaurantsController.renderEditPage)
 router.get('/:id', restaurantsController.getRestaurant)
 router.post('/create', restaurantsController.createRestaurant)
 router.put('/:id', restaurantsController.updateRestaurant)
+router.delete('/:id', restaurantsController.deleteRestaurant)
 module.exports = router

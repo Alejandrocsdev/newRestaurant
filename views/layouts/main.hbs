@@ -21,6 +21,14 @@
       <a class="create-link" href="restaurants/create">新增</a>
     </div>
     {{/if}}
+    {{#if editDelete}}
+    <div class="edit-delete">
+      <a class="edit-link" href="{{restaurant.id}}/edit">編輯</a>
+      <form class="delete-form" action="/restaurants/{{restaurant.id}}?_method=DELETE" method="POST">
+        <button class="delete-btn" type="submit">刪除</button>
+      </form>
+    </div>
+    {{/if}}
   </header>
   <main>
     {{{body}}}

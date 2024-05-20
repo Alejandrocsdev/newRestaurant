@@ -21,6 +21,10 @@ class Service {
   update(body, id) {
     return db[this.model].update(body, { where: { id }})
   }
+
+  delete(id) {
+    return db[this.model].destroy({ where: { id } })
+  }
 }
 
 module.exports = Service
