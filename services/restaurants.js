@@ -1,25 +1,19 @@
-const db = require('../models')
-const Restaurant = db.Restaurant
-const attributes = [
-  'id',
-  'name',
-  'name_en',
-  'category',
-  'image',
-  'location',
-  'phone',
-  'google_map',
-  'rating',
-  'description'
-]
+const Service = require('./base')
 
-class RestaurantsService {
-  getAll() {
-    return Restaurant.findAll({ attributes, raw: true })
-  }
-
-  getById(id) {
-    return Restaurant.findByPk(id, { attributes, raw: true })
+class RestaurantsService extends Service {
+  constructor() {
+    super('Restaurant', [
+      'id',
+      'name',
+      'name_en',
+      'category',
+      'image',
+      'location',
+      'phone',
+      'google_map',
+      'rating',
+      'description'
+    ])
   }
 
   getMatched(restaurants, keyword) {

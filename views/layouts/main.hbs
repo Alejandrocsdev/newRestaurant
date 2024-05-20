@@ -16,6 +16,11 @@
         <i class="fa-solid fa-utensils"></i>
       </a>
     </div>
+    {{#if create}}
+    <div class="create">
+      <a class="create-link" href="restaurants/create">新增</a>
+    </div>
+    {{/if}}
   </header>
   <main>
     {{{body}}}

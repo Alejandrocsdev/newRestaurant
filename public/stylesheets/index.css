@@ -50,6 +50,33 @@ main {
   border: 2px solid #353535;
 }
 
+/* create button */
+
+.create {
+  width: 80px;
+  height: 40px;
+  background-color: #8d99ae;
+  border-radius: 10px;
+  border: 2px solid #353535;
+  position: absolute;
+  right: 130px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: 0.5s;
+}
+
+.create:hover {
+  cursor: pointer;
+  background-color: #d9d9d9;
+}
+
+.create-link {
+  font-weight: 700;
+  text-decoration: none;
+  color: #353535;
+}
+
 /* home.hbs */
 .searchbar {
   height: 50px;
@@ -145,4 +172,70 @@ main {
 td:first-child {
   text-align: center;
   text-wrap: nowrap;
+}
+
+/* create.hbs */
+.create-div {
+  margin-bottom: 20px;
+  display: flex;
+}
+
+.create-label {
+  width: 100px;
+  text-align: center;
+  text-wrap: nowrap;
+}
+
+.create-colon {
+  margin-right: 10px;
+}
+
+.create-input {
+  width: 100%;
+}
+
+.create-btn {
+  display: flex;
+  justify-content: end;
+}
+
+.create-btn>button {
+  width: 60px;
+  margin-left: 16px;
+  border-radius: 10px;
+  border: 2px solid #353535;
+  font-weight: 700;
+  transition: 0.5s;
+}
+
+.create-btn>button:hover {
+  cursor: pointer;
+}
+
+.create-input:valid {
+  border: 2px solid green;
+}
+
+.create-input:invalid {
+  border: 2px solid red;
+}
+
+.submit-btn {
+  background-color: #34a0a4;
+}
+
+.reset-btn {
+  background-color: #c9184a;
+}
+
+.return-btn {
+  background-color: #778da9;
+}
+
+.submit-btn:hover,
+.reset-btn:hover,
+.return-btn:hover {
+  filter: brightness(1.5);
+  color: black;
+  border: 2px solid black;
 }
