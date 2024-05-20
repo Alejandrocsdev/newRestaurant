@@ -15,9 +15,12 @@ app.use(express.static('public'))
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
 app.use(methodOverride('_method'))
+if(process.env.NODE_ENV === 'development') {
+  require('dotenv').config()
+}
 app.use(
   session({
-    secret: 'ThisIsSecret',
+    secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: false
   })
