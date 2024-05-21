@@ -1,0 +1,73 @@
+.create-div,
+.edit-div {
+  margin-bottom: 20px;
+  display: flex;
+}
+
+.create-label,
+.edit-label {
+  width: 100px;
+  text-align: center;
+  text-wrap: nowrap;
+}
+
+.create-colon,
+.edit-colon {
+  margin-right: 10px;
+}
+
+.create-input,
+.edit-input {
+  width: 100%;
+}
+
+.create-page-btns,
+.edit-page-btns {
+  display: flex;
+  justify-content: end;
+}
+
+.create-page-btns>button,
+.edit-page-btns>button {
+  width: 60px;
+  margin-left: 16px;
+  border-radius: 10px;
+  border: 2px solid #353535;
+  font-weight: 700;
+  transition: 0.5s;
+}
+
+.create-page-btns>button:hover,
+.edit-page-btns>button:hover {
+  cursor: pointer;
+}
+
+.create-input:valid,
+.edit-input:valid {
+  border: 2px solid green;
+}
+
+.create-input:invalid,
+.edit-input:invalid {
+  border: 2px solid red;
+}
+
+.submit-btn {
+  background-color: #34a0a4;
+}
+
+.reset-btn {
+  background-color: #c9184a;
+}
+
+.return-btn {
+  background-color: #778da9;
+}
+
+.submit-btn:hover,
+.reset-btn:hover,
+.return-btn:hover {
+  filter: brightness(1.5);
+  color: black;
+  border: 2px solid black;
+}

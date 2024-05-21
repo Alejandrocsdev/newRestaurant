@@ -1,28 +1,39 @@
-// API
-const BASE_URL = window.location.origin
 // 分頁容器
 const paginator = document.querySelector('.paginator')
+// 登入/註冊 彈跳窗
+const sign = document.querySelector('.sign')
+const modalClose = document.querySelector('.modal-close')
+const modalBg = document.querySelector('.modal-bg')
+const modalForm = document.querySelector('.modal-form')
+
 // 新增頁面
-const createBtns = document.querySelector('.create-btn')
+const createPageBtns = document.querySelector('.create-page-btns')
 const createInput = document.querySelectorAll('.create-input')
 // 編輯頁面
-const editBtns = document.querySelector('.edit-btn')
+const editPageBtns = document.querySelector('.edit-page-btns')
 const editInput = document.querySelectorAll('.edit-input')
+// API
+const BASE_URL = window.location.origin
 // 初始內容記錄
 const reset = {}
 
 ;(function init() {
   // 監聽器: 新增頁面按鈕
-  if (createBtns) {
-    createBtns.addEventListener('click', onCreatePage)
+  if (createPageBtns) {
+    createPageBtns.addEventListener('click', onCreatePage)
   }
   // 監聽器: 編輯頁面按鈕
-  if (editBtns) {
+  if (editPageBtns) {
     value('original')
-    editBtns.addEventListener('click', onEditPage)
+    editPageBtns.addEventListener('click', onEditPage)
   }
+  // 監聽器: 登入/註冊 彈跳窗 開
+  sign.addEventListener('click', onOpenModal)
+  // 監聽器: 登入/註冊 彈跳窗 關
+  modalClose.addEventListener('click', onCloseModal)
 })()
 
+// 監聽器函式: 新增頁面按鈕
 function onCreatePage(event) {
   const target = event.target
   if (target.classList.contains('return-btn')) {
@@ -34,6 +45,7 @@ function onCreatePage(event) {
   }
 }
 
+// 監聽器函式: 編輯頁面按鈕
 function onEditPage(event) {
   const target = event.target
   if (target.classList.contains('return-btn')) {
@@ -47,6 +59,23 @@ function onEditPage(event) {
   }
 }
 
+// 監聽器函式: 登入/註冊 彈跳窗 開
+function onOpenModal(event) {
+  const target = event.target
+  if (target.classList.contains('sign-in')) {
+    modalForm.innerHTML = createModal('登入')
+  } else if (target.classList.contains('sign-up')) {
+    modalForm.innerHTML = createModal('註冊')
+  }
+  modalBg.classList.remove('hide')
+}
+
+// 監聽器函式: 登入/註冊 彈跳窗 關
+function onCloseModal() {
+  modalBg.classList.add('hide')
+}
+
+// 儲存初始input值
 function value(type) {
   editInput.forEach((element) => {
     const key = element.getAttribute('name')
@@ -56,4 +85,23 @@ function value(type) {
       element.value = reset[key]
     }
   })
+}
+
+// 新增: 彈跳窗HTML字串
+function createModal(name) {
+  return `<h1 class="modal-name">${name}</h1>
+    ${createLabeledInput('username', '帳號')}
+    ${name === '註冊' ? createLabeledInput('email', '信箱') : ''}
+    ${createLabeledInput('password', '密碼', 'password')}
+    ${name === '註冊' ? createLabeledInput('re-password', '確認密碼', 'password') : ''}
+    <button class="modal-submit" type="submit">提交</button>`
+}
+
+// 新增: 彈跳窗共用input欄位HTML字串
+function createLabeledInput(id, text, type = 'text') {
+  return `<div>
+  <label for="${id}">${text}</label>
+  <span>:</span>
+  <input id="${id}" name="${id}" type="${type}">
+</div>`
 }

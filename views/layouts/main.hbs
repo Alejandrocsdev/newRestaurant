@@ -6,33 +6,69 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Restaurants List</title>
   <link rel="stylesheet" href="/stylesheets/fonts.css">
-  <link rel="stylesheet" href="/stylesheets/index.css">
+  <link rel="stylesheet" href="/stylesheets/main.css">
+  <link rel="stylesheet" href="/stylesheets/home.css">
+  <link rel="stylesheet" href="/stylesheets/detail.css">
+  <link rel="stylesheet" href="/stylesheets/create&edit.css">
 </head>
 
 <body>
   <header>
-    <div class="logo">
-      <a class="logo-link" href="/restaurants">
-        <i class="fa-solid fa-utensils"></i>
-      </a>
+    <div class="nav-left">
+      <div class="logo">
+        <a class="logo-link" href="/restaurants">
+          <i class="fa-solid fa-utensils"></i>
+        </a>
+      </div>
     </div>
-    {{#if create}}
-    <div class="create">
-      <a class="create-link" href="restaurants/create">新增</a>
+    <div class="nav-right">
+      {{!-- {{#if createBtn}}
+      <div class="create-btn">
+        <a class="create-link" href="restaurants/create">新增</a>
+      </div>
+      {{/if}} --}}
+      {{#if editBtns}}
+      <div class="edit-btns {{loggedIn isLoggedIn}}">
+        <a class="edit-link" href="{{restaurant.id}}/edit">編輯</a>
+        <form class="delete-form" action="/restaurants/{{restaurant.id}}?_method=DELETE" method="POST">
+          <button class="delete-btn" type="submit">刪除</button>
+        </form>
+      </div>
+      {{/if}}
+      <div class="sign {{loggedOut isLoggedIn}}">
+        <!-- 登入/註冊 -->
+        <div class="sign-in">
+          登入
+        </div>
+        <div class="sign-up">
+          註冊
+        </div>
+      </div>
+      <!-- 會員頭像 -->
+      <div class="profile-dropdown {{loggedIn isLoggedIn}}">
+        <div class="profile-avatar">
+          <img src="/images/guest.png">
+        </div>
+        <div class="dropdown-content">
+          <a class="profile" href="#">後台</a>
+          <a class="create" href="/restaurants/create">撰寫</a>
+          <a class="logout" href="#">登出</a>
+        </div>
+      </div>
     </div>
-    {{/if}}
-    {{#if editDelete}}
-    <div class="edit-delete">
-      <a class="edit-link" href="{{restaurant.id}}/edit">編輯</a>
-      <form class="delete-form" action="/restaurants/{{restaurant.id}}?_method=DELETE" method="POST">
-        <button class="delete-btn" type="submit">刪除</button>
-      </form>
-    </div>
-    {{/if}}
   </header>
   <main>
     {{{body}}}
   </main>
+  <!-- 登入/註冊彈跳窗 -->
+  <div class="modal-bg hide">
+    <div class="modal">
+      <button class="modal-close" type="button">X</button>
+      <form class="modal-form">
+        <!-- 渲染登入/註冊輸入框 -->
+      </form>
+    </div>
+  </div>
   <script src="https://kit.fontawesome.com/6fb9682f78.js" crossorigin="anonymous"></script>
   <script src="/javascripts/index.js"></script>
 </body>

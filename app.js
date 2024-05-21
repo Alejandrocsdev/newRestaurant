@@ -8,17 +8,13 @@ const port = 3000
 const router = require('./routes')
 const messageHandler = require('./middlewares/message-handler')
 const errorHandler = require('./middlewares/error-handler')
-const hbs = engine({
-  extname: '.hbs',
-  helpers: {
-    inactive: (page, value) => (page === value ? 'inactive' : ''),
-    clicked: (page, value) => (page === value ? 'clicked' : '')
-  }
-})
+
+const helpers = require('./utils')
+const hbs = engine({ extname: '.hbs', helpers })
 app.engine('.hbs', hbs)
-// app.engine('.hbs', engine({ extname: '.hbs' }))
 app.set('view engine', '.hbs')
 app.set('views', './views')
+
 app.use(express.static('public'))
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())

@@ -1,0 +1,16 @@
+.map-link {
+  color: #9b2226;
+}
+
+.detail-img {
+  text-align: center;
+}
+
+.detail-img>img {
+  height: 300px;
+}
+
+td:first-child {
+  text-align: center;
+  text-wrap: nowrap;
+}
