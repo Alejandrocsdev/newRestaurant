@@ -6,8 +6,8 @@ class Service {
     this.attributes = attributes
   }
 
-  getAll() {
-    return db[this.model].findAll({ attributes: this.attributes, raw: true })
+  getAll(offset, limit) {
+    return db[this.model].findAll({ attributes: this.attributes, offset, limit, raw: true })
   }
 
   getById(id) {
@@ -19,7 +19,7 @@ class Service {
   }
 
   update(body, id) {
-    return db[this.model].update(body, { where: { id }})
+    return db[this.model].update(body, { where: { id } })
   }
 
   delete(id) {

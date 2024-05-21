@@ -14,11 +14,21 @@ class RestaurantsService extends Service {
       'rating',
       'description'
     ])
+    this.restaurants = []
+    this.load()
+  }
+
+  async load() {
+    this.restaurants = await this.getAll()
+  }
+
+  getTotalLength() {
+    return this.restaurants.length
   }
 
   getMatched(restaurants, keyword) {
     return keyword
-      ? restaurants.filter((restaurant) =>
+      ? this.restaurants.filter((restaurant) =>
           Object.values(restaurant).some((property) => {
             if (typeof property === 'string') {
               return property.toLowerCase().includes(keyword.toLowerCase())
@@ -44,17 +54,6 @@ class RestaurantsService extends Service {
     }
     return paginator
   }
-
-  // getPaginator(page, totalPages, showPages) {
-  //   const paginator = []
-  //   const startPage = Math.max(1, Math.min(page - Math.floor(showPages / 2), totalPages - showPages + 1))
-
-  //   for (let i = startPage; i < startPage + showPages && i <= totalPages; i++) {
-  //     paginator.push({ page: i })
-  //   }
-
-  //   return paginator
-  // }
 }
 
 const restaurantsService = new RestaurantsService()
