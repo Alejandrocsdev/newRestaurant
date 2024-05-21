@@ -9,6 +9,8 @@ const router = require('./routes')
 const messageHandler = require('./middlewares/message-handler')
 const errorHandler = require('./middlewares/error-handler')
 
+const passport = require('passport')
+
 const helpers = require('./utils')
 const hbs = engine({ extname: '.hbs', helpers })
 app.engine('.hbs', hbs)
@@ -30,6 +32,8 @@ app.use(
   })
 )
 app.use(flash())
+app.use(passport.initialize())
+// app.use(passport.session())
 app.use(messageHandler)
 app.use(router)
 app.use(errorHandler)

@@ -64,10 +64,11 @@ function onOpenModal(event) {
   const target = event.target
   if (target.classList.contains('sign-in')) {
     modalForm.innerHTML = createModal('登入')
+    modalBg.classList.remove('hide')
   } else if (target.classList.contains('sign-up')) {
     modalForm.innerHTML = createModal('註冊')
+    modalBg.classList.remove('hide')
   }
-  modalBg.classList.remove('hide')
 }
 
 // 監聽器函式: 登入/註冊 彈跳窗 關

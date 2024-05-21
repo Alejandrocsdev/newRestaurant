@@ -1,3 +1,4 @@
+const usersController = require('./users')
 const restaurantsController = require('./restaurants')
 
-module.exports = { restaurantsController }
+module.exports = { restaurantsController, usersController }

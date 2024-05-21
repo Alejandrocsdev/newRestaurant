@@ -1,7 +1,7 @@
 const db = require('../models')
 
 class Service {
-  constructor(model, attributes) {
+  constructor(model, attributes, where) {
     this.model = model
     this.attributes = attributes
   }
@@ -16,6 +16,10 @@ class Service {
 
   getById(id) {
     return db[this.model].findByPk(id, { attributes: this.attributes, raw: true })
+  }
+
+  getByData(data) {
+    return db[this.model].findOne({ attributes: this.attributes, where: data, raw: true })
   }
 
   create(body) {
