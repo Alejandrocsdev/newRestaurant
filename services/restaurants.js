@@ -22,20 +22,14 @@ class RestaurantsService extends Service {
     this.restaurants = await this.getAll()
   }
 
-  getTotalLength() {
-    return this.restaurants.length
-  }
-
-  getMatched(restaurants, keyword) {
-    return keyword
-      ? this.restaurants.filter((restaurant) =>
-          Object.values(restaurant).some((property) => {
-            if (typeof property === 'string') {
-              return property.toLowerCase().includes(keyword.toLowerCase())
-            }
-          })
-        )
-      : restaurants
+  getMatched(keyword) {
+    return this.restaurants.filter((restaurant) =>
+      Object.values(restaurant).some((property) => {
+        if (typeof property === 'string') {
+          return property.toLowerCase().includes(keyword.toLowerCase())
+        }
+      })
+    )
   }
 
   getPaginator(page, totalPages, showPages) {

@@ -6,8 +6,12 @@ class Service {
     this.attributes = attributes
   }
 
-  getAll(offset, limit) {
-    return db[this.model].findAll({ attributes: this.attributes, offset, limit, raw: true })
+  getAll() {
+    return db[this.model].findAll({ attributes: this.attributes, raw: true })
+  }
+
+  getAndCountAll(offset, limit) {
+    return db[this.model].findAndCountAll({ attributes: this.attributes, offset, limit, raw: true })
   }
 
   getById(id) {

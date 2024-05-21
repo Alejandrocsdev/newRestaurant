@@ -14,12 +14,14 @@ class RestaurantsController {
       const limit = 3
       // 省略筆數
       const offset = (page - 1) * limit
-      // 取得全部餐廳
-      const restaurants = await restaurantsService.getAll(offset, limit)
+      // 取得資料資訊
+      const data = await restaurantsService.getAndCountAll(offset, limit)
+      // 全部餐廳資訊
+      let restaurants = data.rows
       // 取得搜尋吻合餐廳
-      const matched = restaurantsService.getMatched(restaurants, keyword)
+      restaurants = keyword ? restaurantsService.getMatched(keyword) : restaurants
       // 總餐廳數
-      const totalDatas = keyword ? matched.length : restaurantsService.getTotalLength()
+      const totalDatas = keyword ? restaurants.length : restaurants.count
       // 全部頁數
       const totalPages = Math.ceil(totalDatas / limit)
       // 最大顯示頁數
@@ -28,7 +30,7 @@ class RestaurantsController {
       const paginator = restaurantsService.getPaginator(page, totalPages, showPages)
       // 發送回應
       res.render('home', {
-        restaurants: keyword ? matched.slice((page - 1) * limit, page * limit) : matched,
+        restaurants: keyword ? restaurants.slice((page - 1) * limit, page * limit) : restaurants,
         first: 1,
         prev: page > 1 ? page - 1 : page,
         next: page < totalPages ? page + 1 : page,
