@@ -5,15 +5,37 @@ class RestaurantsController {
   async getAllRestaurants(req, res, next) {
     try {
       // 搜尋關鍵字
-      const keyword = req.query.search?.trim()
+      const keyword = req.query.search || ''
       // 渲染新增按鈕
       const create = true
       // 取得全部餐廳
       const restaurants = await restaurantsService.getAll()
       // 取得搜尋吻合餐廳
       const matched = await restaurantsService.getMatched(restaurants, keyword)
+      // 當前頁數
+      const page = Number(req.query.page) || 1
+      // 顯示餐廳數
+      const limit = 3
+      // 最大顯示頁數
+      const showPages = 3
+      // 總餐廳數
+      const totalDatas = matched.length
+      // 全部頁數
+      const totalPages = Math.ceil(totalDatas / limit)
+      // 分頁資訊
+      const paginator = restaurantsService.getPaginator(page, totalPages, showPages)
       // 發送回應
-      res.render('home', { restaurants: matched, keyword, create })
+      res.render('home', {
+        restaurants: matched.slice((page - 1) * limit, page * limit),
+        first: 1,
+        prev: page > 1 ? page - 1 : page,
+        next: page < totalPages ? page + 1 : page,
+        last: totalPages,
+        paginator,
+        page,
+        keyword,
+        create
+      })
     } catch (error) {
       // 錯誤處理中間件
       next(error)

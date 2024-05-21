@@ -8,14 +8,22 @@ const port = 3000
 const router = require('./routes')
 const messageHandler = require('./middlewares/message-handler')
 const errorHandler = require('./middlewares/error-handler')
-app.engine('.hbs', engine({ extname: '.hbs' }))
+const hbs = engine({
+  extname: '.hbs',
+  helpers: {
+    inactive: (page, value) => (page === value ? 'inactive' : ''),
+    clicked: (page, value) => (page === value ? 'clicked' : '')
+  }
+})
+app.engine('.hbs', hbs)
+// app.engine('.hbs', engine({ extname: '.hbs' }))
 app.set('view engine', '.hbs')
 app.set('views', './views')
 app.use(express.static('public'))
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
 app.use(methodOverride('_method'))
-if(process.env.NODE_ENV === 'development') {
+if (process.env.NODE_ENV === 'development') {
   require('dotenv').config()
 }
 app.use(

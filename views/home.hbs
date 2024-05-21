@@ -27,3 +27,42 @@
   </a>
   {{/each}}
 </div>
+<div class="paginator">
+  <form action="/restaurants">
+    <input type="hidden" name="page" value="{{first}}">
+    <input type="hidden" name="search" value="{{keyword}}">
+    <button class="page-btn {{inactive page first}}" type="submit">
+      <i class="fa-solid fa-backward-fast"></i>
+    </button>
+  </form>
+  <form action="/restaurants">
+    <input type="hidden" name="page" value="{{prev}}">
+    <input type="hidden" name="search" value="{{keyword}}">
+    <button class="page-btn {{inactive page first}}" type="submit">
+      <i class="fa-solid fa-caret-left"></i>
+    </button>
+  </form>
+  {{#each paginator}}
+  <form action="/restaurants">
+    <input type="hidden" name="page" value="{{this}}">
+    <input type="hidden" name="search" value="{{../keyword}}">
+    <button class="page-btn {{clicked ../page this}}" type="submit">
+      <div>{{this}}</div>
+    </button>
+  </form>
+  {{/each}}
+  <form action="/restaurants">
+    <input type="hidden" name="page" value="{{next}}">
+    <input type="hidden" name="search" value="{{keyword}}">
+    <button class="page-btn {{inactive page last}}" type="submit">
+      <i class="fa-solid fa-caret-right"></i>
+    </button>
+  </form>
+  <form action="/restaurants">
+    <input type="hidden" name="page" value="{{last}}">
+    <input type="hidden" name="search" value="{{keyword}}">
+    <button class="page-btn {{inactive page last}}" type="submit">
+      <i class="fa-solid fa-forward-fast"></i>
+    </button>
+  </form>
+</div>
