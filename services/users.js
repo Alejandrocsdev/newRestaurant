@@ -6,6 +6,4 @@ class UsersService extends Service {
   }
 }
 
-const usersService = new UsersService()
-
-module.exports = usersService
+module.exports = new UsersService()

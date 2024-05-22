@@ -178,6 +178,4 @@ class RestaurantsController {
   }
 }
 
-const restaurantsController = new RestaurantsController()
-
-module.exports = restaurantsController
+module.exports = new RestaurantsController()

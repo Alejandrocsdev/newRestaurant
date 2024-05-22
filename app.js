@@ -1,14 +1,19 @@
 const express = require('express')
+const app = express()
+
 const { engine } = require('express-handlebars')
-const session = require('express-session')
-const flash = require('connect-flash')
-const methodOverride = require('method-override')
-const router = require('./routes')
-const messageHandler = require('./middlewares/message-handler')
-const errorHandler = require('./middlewares/error-handler')
 const helpers = require('./utils')
 const hbs = engine({ extname: '.hbs', helpers })
-const app = express()
+
+const methodOverride = require('method-override')
+
+const session = require('express-session')
+const flash = require('connect-flash')
+
+const messageHandler = require('./middlewares/message-handler')
+const router = require('./routes')
+const errorHandler = require('./middlewares/error-handler')
+
 const port = 3000
 // Set up view engine
 app.engine('.hbs', hbs)
@@ -23,9 +28,7 @@ app.use(express.json())
 // Middleware to support HTTP method overrides (e.g., PUT and DELETE)
 app.use(methodOverride('_method'))
 // Load environment variables in development mode
-if (process.env.NODE_ENV === 'development') {
-  require('dotenv').config()
-}
+if (process.env.NODE_ENV === 'development') require('dotenv').config()
 // Session management middleware
 app.use(
   session({

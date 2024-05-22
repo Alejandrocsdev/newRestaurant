@@ -50,6 +50,4 @@ class RestaurantsService extends Service {
   }
 }
 
-const restaurantsService = new RestaurantsService()
-
-module.exports = restaurantsService
+module.exports = new RestaurantsService()
