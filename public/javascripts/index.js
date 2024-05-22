@@ -4,8 +4,7 @@ const paginator = document.querySelector('.paginator')
 const sign = document.querySelector('.sign')
 const modalClose = document.querySelector('.modal-close')
 const modalBg = document.querySelector('.modal-bg')
-const modalForm = document.querySelector('.modal-form')
-
+const modal = document.querySelector('.modal')
 // 新增頁面
 const createPageBtns = document.querySelector('.create-page-btns')
 const createInput = document.querySelectorAll('.create-input')
@@ -29,8 +28,6 @@ const reset = {}
   }
   // 監聽器: 登入/註冊 彈跳窗 開
   sign.addEventListener('click', onOpenModal)
-  // 監聽器: 登入/註冊 彈跳窗 關
-  modalClose.addEventListener('click', onCloseModal)
 })()
 
 // 監聽器函式: 新增頁面按鈕
@@ -63,17 +60,15 @@ function onEditPage(event) {
 function onOpenModal(event) {
   const target = event.target
   if (target.classList.contains('sign-in')) {
-    modalForm.innerHTML = createModal('登入')
+    modal.innerHTML = createModal('登入')
     modalBg.classList.remove('hide')
   } else if (target.classList.contains('sign-up')) {
-    modalForm.innerHTML = createModal('註冊')
+    modal.innerHTML = createModal('註冊')
     modalBg.classList.remove('hide')
   }
-}
-
-// 監聽器函式: 登入/註冊 彈跳窗 關
-function onCloseModal() {
-  modalBg.classList.add('hide')
+  // 監聽器: 登入/註冊 彈跳窗 關
+  const modalClose = document.querySelector('.modal-close')
+  modalClose.addEventListener('click', () => modalBg.classList.add('hide'))
 }
 
 // 儲存初始input值
@@ -90,12 +85,16 @@ function value(type) {
 
 // 新增: 彈跳窗HTML字串
 function createModal(name) {
-  return `<h1 class="modal-name">${name}</h1>
+  const path = name === '註冊' ? 'register' : 'login'
+  return `<form class="modal-form" action="/users/${path}" method="POST">
+    <button class="modal-close" type="button">X</button>
+    <h1 class="modal-name">${name}</h1>
     ${createLabeledInput('username', '帳號')}
     ${name === '註冊' ? createLabeledInput('email', '信箱') : ''}
     ${createLabeledInput('password', '密碼', 'password')}
     ${name === '註冊' ? createLabeledInput('re-password', '確認密碼', 'password') : ''}
-    <button class="modal-submit" type="submit">提交</button>`
+    <button class="modal-submit" type="submit">提交</button>
+  </form>`
 }
 
 // 新增: 彈跳窗共用input欄位HTML字串
