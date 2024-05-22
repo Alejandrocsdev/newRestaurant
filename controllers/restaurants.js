@@ -4,9 +4,6 @@ class RestaurantsController {
   // 取得全部餐廳資訊
   async getAllRestaurants(req, res, next) {
     try {
-      // console.log('session', req.session)
-      // // 渲染新增按鈕
-      // const createBtn = true
       // 登入狀態
       const isLoggedIn = false
       // 搜尋關鍵字

@@ -86,7 +86,9 @@ function value(type) {
 // 新增: 彈跳窗HTML字串
 function createModal(name) {
   const path = name === '註冊' ? 'register' : 'login'
+  const pathname = window.location.pathname
   return `<form class="modal-form" action="/users/${path}" method="POST">
+    <input type="hidden" name="path" value="${pathname}">
     <button class="modal-close" type="button">X</button>
     <h1 class="modal-name">${name}</h1>
     ${createLabeledInput('username', '帳號')}
