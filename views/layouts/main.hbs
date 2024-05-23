@@ -14,6 +14,7 @@
 
 <body>
   <header>
+    {{> message}}
     <div class="nav-left">
       <div class="logo">
         <a class="logo-link" href="/restaurants">
@@ -28,16 +29,16 @@
       </div>
       {{/if}} --}}
       {{#if editBtns}}
-      {{!-- <div class="edit-btns {{loggedIn isLoggedIn}}"> --}}
-        <div class="edit-btns">
+      <div class="edit-btns {{loggedIn isLoggedIn}}">
+        {{!-- <div class="edit-btns"> --}}
           <a class="edit-link" href="{{restaurant.id}}/edit">編輯</a>
           <form class="delete-form" action="/restaurants/{{restaurant.id}}?_method=DELETE" method="POST">
             <button class="delete-btn" type="submit">刪除</button>
           </form>
         </div>
         {{/if}}
-        {{!-- <div class="sign {{loggedOut isLoggedIn}}"> --}}
-          <div class="sign">
+        <div class="sign {{loggedOut isLoggedIn}}">
+          {{!-- <div class="sign"> --}}
             <!-- 登入/註冊 -->
             <div class="sign-in">
               登入
@@ -47,8 +48,8 @@
             </div>
           </div>
           <!-- 會員頭像 -->
-          {{!-- <div class="profile-dropdown {{loggedIn isLoggedIn}}"> --}}
-            <div class="profile-dropdown">
+          <div class="profile-dropdown {{loggedIn isLoggedIn}}">
+            {{!-- <div class="profile-dropdown"> --}}
               <div class="profile-avatar">
                 <img src="/images/guest.png">
               </div>

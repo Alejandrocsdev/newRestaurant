@@ -5,7 +5,7 @@ class RestaurantsController {
   async getAllRestaurants(req, res, next) {
     try {
       // 登入狀態
-      const isLoggedIn = false
+      const isLoggedIn = res.locals.isLoggedIn
       // 搜尋關鍵字
       const keyword = req.query.search || ''
       // 當前頁數
@@ -48,7 +48,7 @@ class RestaurantsController {
   async getRestaurant(req, res, next) {
     try {
       // 登入狀態
-      const isLoggedIn = false
+      const isLoggedIn = res.locals.isLoggedIn
       // 渲染編輯按鈕
       const editBtns = true
       // 取得參數id
@@ -122,7 +122,7 @@ class RestaurantsController {
       // 成功訊息
       req.flash('success', '更新成功')
       // 發送回應
-      res.redirect('/restaurants')
+      res.redirect(`/restaurants/${id}`)
     } catch (error) {
       // 訊息處理中間件
       error.errorMessage = '更新失敗'
@@ -152,7 +152,7 @@ class RestaurantsController {
   renderCreatePage(req, res, next) {
     try {
       // 登入狀態
-      const isLoggedIn = false
+      const isLoggedIn = res.locals.isLoggedIn
       // 發送回應
       res.render('create', { isLoggedIn })
     } catch (error) {
@@ -164,7 +164,7 @@ class RestaurantsController {
   async renderEditPage(req, res, next) {
     try {
       // 登入狀態
-      const isLoggedIn = false
+      const isLoggedIn = res.locals.isLoggedIn
       // 取得參數id
       const id = req.params.id
       // 取得單間餐廳

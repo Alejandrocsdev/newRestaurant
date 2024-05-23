@@ -5,7 +5,6 @@ const { redirection } = require('../utils')
 class AuthController {
   login(req, res, next) {
     const path = redirection(req.headers.referer)
-
     authService.authenticate(path)(req, res, next)
   }
 

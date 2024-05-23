@@ -13,8 +13,10 @@ const verifyCallback = async (username, password, done) => {
   try {
     const user = await usersService.getByData({ username })
     console.log('user: ', user)
-    if (!user) throw new Error('帳號錯誤')
-    if (user.password !== password) throw new Error('密碼錯誤')
+    // if (!user) throw new Error('帳號錯誤')
+    // if (user.password !== password) throw new Error('密碼錯誤')
+    if (!user) return done(null, false, { message: '帳號錯誤' })
+    if (user.password !== password) return done(null, false, { message: '密碼錯誤' })
     done(null, user)
   } catch (error) {
     done(error, null)
