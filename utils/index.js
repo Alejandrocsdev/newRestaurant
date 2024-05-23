@@ -10,4 +10,23 @@ const helpers = {
   loggedOut: (isLoggedIn) => (isLoggedIn ? 'hide' : '')
 }
 
-module.exports = helpers
+function redirection(referer) {
+  const url = new URL(referer)
+  const refererPath = url.pathname
+  if (/^\/restaurants\/\d+$/.test(refererPath)) return refererPath
+  else return '/restaurants'
+}
+
+function nonProtectedPath(req) {
+  const method = req.method
+  const path = req.originalUrl
+  const { page, search } = req.query
+
+  if (method === 'GET' && path === '/restaurants') return true
+  if (method === 'GET' && path.startsWith('/restaurants') && (page || search)) return true
+  if (method === 'GET' && /^\/restaurants\/\d+$/.test(path)) return true
+  
+  return false
+}
+
+module.exports = { helpers, redirection, nonProtectedPath }

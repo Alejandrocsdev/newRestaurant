@@ -2,7 +2,7 @@ const express = require('express')
 const app = express()
 
 const { engine } = require('express-handlebars')
-const helpers = require('./utils')
+const { helpers } = require('./utils')
 const hbs = engine({ extname: '.hbs', helpers })
 
 const methodOverride = require('method-override')

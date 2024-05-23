@@ -1,13 +1,10 @@
+const { redirection, nonProtectedPath } = require('../utils')
+
 function authHandler(req, res, next) {
-  const method = req.method
-  const path = req.originalUrl
-
-  if (method === 'GET' && path === '/restaurants') return next()
-  if (method === 'GET' && /^\/restaurants\/\d+$/.test(path)) return next()
-
+  if(nonProtectedPath(req)) return next()
   if (req.isAuthenticated()) return next()
-
-  res.redirect('/restaurants')
+  const path = redirection(req.headers.referer)
+  res.redirect(path)
 }
 
 module.exports = authHandler
