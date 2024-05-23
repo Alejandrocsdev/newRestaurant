@@ -30,38 +30,35 @@
       {{/if}} --}}
       {{#if editBtns}}
       <div class="edit-btns {{loggedIn isLoggedIn}}">
-        {{!-- <div class="edit-btns"> --}}
-          <a class="edit-link" href="{{restaurant.id}}/edit">編輯</a>
-          <form class="delete-form" action="/restaurants/{{restaurant.id}}?_method=DELETE" method="POST">
-            <button class="delete-btn" type="submit">刪除</button>
+        <a class="edit-link" href="{{restaurant.id}}/edit">編輯</a>
+        <form class="delete-form" action="/restaurants/{{restaurant.id}}?_method=DELETE" method="POST">
+          <button class="delete-btn" type="submit">刪除</button>
+        </form>
+      </div>
+      {{/if}}
+      <div class="sign {{loggedOut isLoggedIn}}">
+        <!-- 登入/註冊 -->
+        <div class="sign-in">
+          登入
+        </div>
+        <div class="sign-up">
+          註冊
+        </div>
+      </div>
+      <!-- 會員頭像 -->
+      <div class="profile-dropdown {{loggedIn isLoggedIn}}">
+        <div class="profile-avatar">
+          <img src="/images/guest.png">
+        </div>
+        <div class="dropdown-content">
+          <a class="profile" href="#">後台</a>
+          <a class="create" href="/restaurants/create">撰寫</a>
+          <form class="logout-form" action="/auth/logout" method="post">
+            <button class="logout" type="submit">登出</button>
           </form>
         </div>
-        {{/if}}
-        <div class="sign {{loggedOut isLoggedIn}}">
-          {{!-- <div class="sign"> --}}
-            <!-- 登入/註冊 -->
-            <div class="sign-in">
-              登入
-            </div>
-            <div class="sign-up">
-              註冊
-            </div>
-          </div>
-          <!-- 會員頭像 -->
-          <div class="profile-dropdown {{loggedIn isLoggedIn}}">
-            {{!-- <div class="profile-dropdown"> --}}
-              <div class="profile-avatar">
-                <img src="/images/guest.png">
-              </div>
-              <div class="dropdown-content">
-                <a class="profile" href="#">後台</a>
-                <a class="create" href="/restaurants/create">撰寫</a>
-                <form class="logout-form" action="/auth/logout" method="post">
-                  <button class="logout" type="submit">登出</button>
-                </form>
-              </div>
-            </div>
-          </div>
+      </div>
+    </div>
   </header>
   <main>
     {{{body}}}
