@@ -149,7 +149,7 @@ class RestaurantsController {
     }
   }
   // 渲染新增頁面
-  renderCreatePage(req, res) {
+  renderCreatePage(req, res, next) {
     try {
       // 登入狀態
       const isLoggedIn = false

@@ -87,7 +87,7 @@ function value(type) {
 function createModal(name) {
   const path = name === '註冊' ? 'register' : 'login'
   const pathname = window.location.pathname
-  return `<form class="modal-form" action="/users/${path}" method="POST">
+  return `<form class="modal-form" action="/auth/${path}" method="POST">
     <input type="hidden" name="path" value="${pathname}">
     <button class="modal-close" type="button">X</button>
     <h1 class="modal-name">${name}</h1>

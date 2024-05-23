@@ -10,9 +10,12 @@ const methodOverride = require('method-override')
 const session = require('express-session')
 const flash = require('connect-flash')
 
-const messageHandler = require('./middlewares/message-handler')
+const passport = require('passport')
+const auth = require('./auth')
+
+const { messageHandler, errorHandler } = require('./middlewares')
+
 const router = require('./routes')
-const errorHandler = require('./middlewares/error-handler')
 
 const port = 3000
 // Set up view engine
@@ -23,8 +26,6 @@ app.set('views', './views')
 app.use(express.static('public'))
 // Middleware to parse URL-encoded bodies
 app.use(express.urlencoded({ extended: true }))
-// Middleware to parse JSON bodies
-app.use(express.json())
 // Middleware to support HTTP method overrides (e.g., PUT and DELETE)
 app.use(methodOverride('_method'))
 // Load environment variables in development mode
@@ -39,6 +40,10 @@ app.use(
 )
 // Flash message middleware (must be used after session)
 app.use(flash())
+// Initialize passport
+auth(passport)
+app.use(passport.initialize())
+app.use(passport.session())
 // Custom message handler middleware
 app.use(messageHandler)
 // Main router middleware (must go after all setup middleware)

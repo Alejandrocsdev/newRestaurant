@@ -154,6 +154,7 @@ header {
   border: 2px solid black;
 }
 
+/* profile dropdown */
 .profile-dropdown {
   margin-right: 20px;
 }
@@ -199,6 +200,22 @@ header {
 }
 
 .dropdown-content a:hover {
+  background-color: #ffddd2;
+  filter: brightness(90%);
+}
+
+.logout {
+  width: 100%;
+  padding: 12px 16px;
+  background-color: transparent;
+  color: #353535;
+  font-weight: 700;
+  font-size: 16px;
+  border: 1px solid #353535;
+  cursor: pointer;
+}
+
+.logout:hover {
   background-color: #ffddd2;
   filter: brightness(90%);
 }
