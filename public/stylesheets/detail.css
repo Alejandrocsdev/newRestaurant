@@ -1,3 +1,25 @@
+.detail-main-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.detail-container {
+  width: 100%;
+}
+
+.previous-detail,
+.next-detail {
+  font-size: 24px;
+  color: black;
+  cursor: pointer;
+}
+
+.previous-detail:hover,
+.next-detail:hover {
+  color: green
+}
+
 .map-link {
   color: #9b2226;
 }
@@ -17,6 +39,7 @@ td:first-child {
 
 /* return button */
 .detail-page-btns {
+  margin-top: 10px;
   display: flex;
   justify-content: end;
 }
