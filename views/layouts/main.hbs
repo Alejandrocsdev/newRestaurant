@@ -28,16 +28,18 @@
         <a class="create-link" href="restaurants/create">新增</a>
       </div>
       {{/if}} --}}
-      {{#if editBtns}}
-      <div class="edit-btns {{loggedIn isLoggedIn}}">
+      {{#if (and isLoggedIn editBtns)}}
+      <!-- 編輯/刪除 -->
+      <div class="edit-btns">
         <a class="edit-link" href="{{restaurant.id}}/edit">編輯</a>
         <form class="delete-form" action="/restaurants/{{restaurant.id}}?_method=DELETE" method="POST">
           <button class="delete-btn" type="submit">刪除</button>
         </form>
       </div>
       {{/if}}
-      <div class="sign {{loggedOut isLoggedIn}}">
-        <!-- 登入/註冊 -->
+      {{#unless isLoggedIn}}
+      <!-- 登入/註冊 -->
+      <div class="sign">
         <div class="sign-in">
           登入
         </div>
@@ -45,8 +47,10 @@
           註冊
         </div>
       </div>
+      {{/unless}}
+      {{#if isLoggedIn}}
       <!-- 會員頭像 -->
-      <div class="profile-dropdown {{loggedIn isLoggedIn}}">
+      <div class="profile-dropdown">
         <div class="profile-avatar">
           <img src="/images/guest.png">
         </div>
@@ -58,6 +62,7 @@
           </form>
         </div>
       </div>
+      {{/if}}
     </div>
   </header>
   <main>

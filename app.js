@@ -44,11 +44,6 @@ app.use(flash())
 auth(passport)
 app.use(passport.initialize())
 app.use(passport.session())
-app.use((req, res, next) => {
-  console.log('User: ', req.user)
-  console.log('Session: ', req.session)
-  next()
-})
 // Custom message handler middleware
 app.use(messageHandler)
 // Main router middleware (must go after all setup middleware)

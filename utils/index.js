@@ -4,10 +4,8 @@ const helpers = {
   inactive: (page, value) => (page === value ? 'inactive' : ''),
   // 分頁按鈕點擊樣式
   clicked: (page, value) => (page === value ? 'clicked' : ''),
-  // 登入樣式
-  loggedIn: (isLoggedIn) => (isLoggedIn ? '' : 'hide'),
-  // 登出樣式
-  loggedOut: (isLoggedIn) => (isLoggedIn ? 'hide' : '')
+  // 接受兩個值
+  and: (a, b) => a && b
 }
 
 function redirection(referer) {
@@ -17,7 +15,7 @@ function redirection(referer) {
   else return '/restaurants'
 }
 
-function nonProtectedPath(req) {
+function nonProtectedRoute(req) {
   const method = req.method
   const path = req.originalUrl
   const { page, search } = req.query
@@ -29,4 +27,4 @@ function nonProtectedPath(req) {
   return false
 }
 
-module.exports = { helpers, redirection, nonProtectedPath }
+module.exports = { helpers, redirection, nonProtectedRoute }
