@@ -14,6 +14,8 @@ router.post('/login', (req, res, next) => {
   passport.authenticate('local', options, callback)(req, res, next)
 })
 
+// router.post('/login', passport.authenticate('local', options))
+
 router.post('/logout', authController.logout)
 
 module.exports = router

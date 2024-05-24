@@ -1,0 +1,20 @@
+<div class="profile-info">
+  <form class="avatar-form">
+    <input class="fileInput" type="file" name="file" />
+    <img src="/images/guest.png">
+  </form>
+  <div class="info">
+    <label for="profile-username">帳號:</label>
+    <div id="profile-username">{{user.username}}</div>
+    <label for="profile-email">信箱:</label>
+    <div id="profile-email">{{user.email}}</div>
+  </div>
+</div>
+<div class="user-articles">
+  {{#unless restaurants}}
+  目前沒有文章
+  {{/unless}}
+  {{#each restaurants}}
+  <a class="article-title" href="/users/restaurant/{{this.id}}">{{this.name}}</a>
+  {{/each}}
+</div>

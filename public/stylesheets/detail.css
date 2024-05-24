@@ -14,3 +14,47 @@ td:first-child {
   text-align: center;
   text-wrap: nowrap;
 }
+
+/* return button */
+.detail-page-btns {
+  display: flex;
+  justify-content: end;
+}
+
+.edit-btn,
+.delete-btn,
+.return-btn {
+  width: 60px;
+  margin-left: 16px;
+  border-radius: 10px;
+  border: 2px solid #353535;
+  font-size: 16px;
+  font-weight: 700;
+  text-decoration: none;
+  color: black;
+  transition: 0.5s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.edit-btn {
+  background-color: #34a0a4;
+}
+
+.delete-btn {
+  background-color: #c9184a;
+}
+
+.return-btn {
+  background-color: #778da9;
+}
+
+.edit-btn:hover,
+.delete-btn:hover,
+.return-btn:hover {
+  filter: brightness(1.5);
+  color: black;
+  border: 2px solid black;
+  cursor: pointer;
+}

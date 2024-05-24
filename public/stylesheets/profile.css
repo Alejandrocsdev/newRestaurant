@@ -1,0 +1,62 @@
+.profile-info {
+  background-color: #f0e3db;
+  border: 2px solid #353535;
+  display: flex;
+}
+
+.avatar-form {
+  width: 256px;
+  height: 256px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.avatar-form img {
+  width: 80%;
+  height: 80%;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.fileInput {
+  display: none;
+}
+
+.info {
+  padding: 20px 30px 20px 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+.info label {
+  font-weight: 700;
+}
+
+.user-articles {
+  padding: 30px;
+  background-color: #d4a373;
+  border: 2px solid #353535;
+  border-top: none;
+  text-align: center;
+  display: grid;
+  gap: 10px;
+}
+
+.article-title {
+  padding: 10px;
+  background-color: #ffe8d6;
+  border: 2px solid #353535;
+  border-radius: 5px;
+  font-weight: 700;
+  color: #353535;
+  text-decoration: none;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.article-title:hover {
+  background-color: #ffe8d6;
+  filter: brightness(80%);
+}

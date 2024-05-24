@@ -2,14 +2,14 @@
 
 /** @type {import('sequelize-cli').Migration} */
 
-const data = require('../public/jsons/restaurants.json')
+const data = require('../public/jsons/users.json')
 
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.bulkInsert('Restaurants', data)
+    await queryInterface.bulkInsert('Users', data)
   },
 
   async down(queryInterface, Sequelize) {
-    await queryInterface.bulkDelete('Restaurants', null)
+    await queryInterface.bulkDelete('Users', null)
   }
 }

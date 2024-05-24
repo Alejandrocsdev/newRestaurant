@@ -10,6 +10,7 @@
   <link rel="stylesheet" href="/stylesheets/home.css">
   <link rel="stylesheet" href="/stylesheets/detail.css">
   <link rel="stylesheet" href="/stylesheets/create&edit.css">
+  <link rel="stylesheet" href="/stylesheets/profile.css">
 </head>
 
 <body>
@@ -23,20 +24,6 @@
       </div>
     </div>
     <div class="nav-right">
-      {{!-- {{#if createBtn}}
-      <div class="create-btn">
-        <a class="create-link" href="restaurants/create">新增</a>
-      </div>
-      {{/if}} --}}
-      {{#if (and isLoggedIn editBtns)}}
-      <!-- 編輯/刪除 -->
-      <div class="edit-btns">
-        <a class="edit-link" href="{{restaurant.id}}/edit">編輯</a>
-        <form class="delete-form" action="/restaurants/{{restaurant.id}}?_method=DELETE" method="POST">
-          <button class="delete-btn" type="submit">刪除</button>
-        </form>
-      </div>
-      {{/if}}
       {{#unless isLoggedIn}}
       <!-- 登入/註冊 -->
       <div class="sign">
@@ -55,8 +42,8 @@
           <img src="/images/guest.png">
         </div>
         <div class="dropdown-content">
-          <a class="profile" href="#">後台</a>
-          <a class="create" href="/restaurants/create">撰寫</a>
+          <a class="profile" href="/users/profile">後台</a>
+          <a class="create" href="/users/restaurant/create">撰寫</a>
           <form class="logout-form" action="/auth/logout" method="post">
             <button class="logout" type="submit">登出</button>
           </form>

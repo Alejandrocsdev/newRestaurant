@@ -1,8 +1,179 @@
-const { usersService } = require('../services')
+const { usersService, restaurantsService } = require('../services')
+
+const { returnPage } = require('../utils')
 
 class UsersController {
   register(req, res, next) {
     res.send('register')
+  }
+  // 渲染會員頁面
+  async renderProfile(req, res, next) {
+    try {
+      // 用戶ID
+      const userId = req.user.id
+      // 取得用戶資訊
+      const user = await usersService.getById(userId)
+      // 檢查用戶是否存在
+      if (!user) {
+        req.flash('error', '查無用戶}')
+        return res.redirect('/restaurants')
+      }
+      // 取得餐廳資訊(有可能會沒有)
+      const restaurants = await restaurantsService.getAll({ userId })
+      // 發送回應
+      res.render('profile', { user, restaurants })
+    } catch (error) {
+      // 錯誤處理中間件
+      next(error)
+    }
+  }
+  // 渲染新增頁面
+  renderCreatePage(req, res, next) {
+    try {
+      // 返回頁面
+      const back = returnPage(req.headers.referer)
+      // 登入狀態
+      const isLoggedIn = res.locals.isLoggedIn || false
+      // 發送回應
+      res.render('create', { isLoggedIn, back })
+    } catch (error) {
+      // 錯誤處理中間件
+      next(error)
+    }
+  }
+  // 渲染編輯頁面(含取得單間餐廳資訊)
+  async renderEditPage(req, res, next) {
+    try {
+      // 返回頁面
+      const back = returnPage(req.headers.referer)
+      // 登入狀態
+      const isLoggedIn = res.locals.isLoggedIn || false
+      // 取得餐廳ID
+      const id = req.params.id
+      // 取得單間餐廳
+      const restaurant = await restaurantsService.getById(id)
+      // 發送回應
+      res.render('edit', { restaurant, isLoggedIn, back })
+    } catch (error) {
+      // 錯誤處理中間件
+      next(error)
+    }
+  }
+  // 取得用戶單間餐廳資訊
+  async renderUserRestaurant(req, res, next) {
+    try {
+      // 返回頁面
+      const back = returnPage(req.headers.referer)
+      // 登入狀態
+      const isLoggedIn = res.locals.isLoggedIn || false
+      // // 渲染編輯按鈕
+      const editBtns = true
+      // 用戶ID
+      const userId = req.user.id
+      // 取得餐廳UD
+      const id = req.params.id
+      // 取得單間餐廳
+      const restaurant = await restaurantsService.getById(id)
+      // 檢查餐廳是否存在
+      if (!restaurant) {
+        req.flash('error', '查無餐廳')
+        return res.redirect('/restaurants')
+      }
+      if (restaurant.userId !== userId) {
+        req.flash('error', '權限不足')
+        return res.redirect('/restaurants')
+      }
+      // 發送回應
+      res.render('detail', { restaurant, isLoggedIn, editBtns, back })
+    } catch (error) {
+      // 錯誤處理中間件
+      next(error)
+    }
+  }
+
+  // 新增餐廳
+  async createRestaurant(req, res, next) {
+    try {
+      // 宣告表單資料
+      const { name, name_en, category, image, location, phone, google_map, rating, description } =
+        req.body
+      // 用戶ID
+      const userId = req.user.id
+      // 根據表單資料新增餐廳
+      await restaurantsService.create({
+        name,
+        name_en,
+        category,
+        image,
+        location,
+        phone,
+        google_map,
+        rating,
+        description,
+        userId
+      })
+      // 成功訊息
+      req.flash('success', '新增成功')
+      // 發送回應
+      res.redirect('/restaurants')
+    } catch (error) {
+      // 訊息處理中間件
+      error.errorMessage = '新增失敗'
+      // 錯誤處理中間件
+      next(error)
+    }
+  }
+  // 更新餐廳
+  async updateRestaurant(req, res, next) {
+    try {
+      // 宣告表單資料
+      const { name, name_en, category, image, location, phone, google_map, rating, description } =
+        req.body
+      // 取得餐廳ID
+      const id = req.params.id
+      // 根據表單資料更新餐廳
+      await restaurantsService.update(
+        {
+          name,
+          name_en,
+          category,
+          image,
+          location,
+          phone,
+          google_map,
+          rating,
+          description
+        },
+        id
+      )
+      // 成功訊息
+      req.flash('success', '更新成功')
+      // 發送回應
+      res.redirect(`/users/restaurant/${id}`)
+    } catch (error) {
+      // 訊息處理中間件
+      error.errorMessage = '更新失敗'
+      // 錯誤處理中間件
+      next(error)
+    }
+  }
+  // 刪除餐廳
+  async deleteRestaurant(req, res, next) {
+    try {
+      // 取得餐廳ID
+      const id = req.params.id
+      // 刪除餐廳
+      await restaurantsService.delete(id)
+      // 成功訊息
+      req.flash('success', '刪除成功')
+      // 發送回應
+      res.redirect('/restaurants')
+    } catch (error) {
+      // 訊息處理中間件
+      error.errorMessage = '刪除失敗'
+      // 錯誤處理中間件
+      next(error)
+    }
   }
 }
 

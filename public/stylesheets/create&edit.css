@@ -28,13 +28,21 @@
 }
 
 .create-page-btns>button,
-.edit-page-btns>button {
+.edit-page-btns>button,
+.create-page-btns>a,
+.edit-page-btns>a {
   width: 60px;
   margin-left: 16px;
   border-radius: 10px;
   border: 2px solid #353535;
+  font-size: 16px;
   font-weight: 700;
+  text-decoration: none;
+  color: black;
   transition: 0.5s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .create-page-btns>button:hover,

@@ -12,7 +12,8 @@ class RestaurantsService extends Service {
       'phone',
       'google_map',
       'rating',
-      'description'
+      'description',
+      'userId'
     ])
     this.restaurants = []
     this.load()

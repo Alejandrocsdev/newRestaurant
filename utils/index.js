@@ -15,6 +15,14 @@ function redirection(referer) {
   else return '/restaurants'
 }
 
+function returnPage(referer) {
+  const url = new URL(referer)
+  const pathname = url.pathname
+  const search = url.search
+  const returnPath = `${pathname}${search}`
+  return returnPath
+}
+
 function nonProtectedRoute(req) {
   const method = req.method
   const path = req.originalUrl
@@ -27,4 +35,4 @@ function nonProtectedRoute(req) {
   return false
 }
 
-module.exports = { helpers, redirection, nonProtectedRoute }
+module.exports = { helpers, redirection, returnPage, nonProtectedRoute }

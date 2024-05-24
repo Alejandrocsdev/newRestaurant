@@ -1,0 +1,14 @@
+1.在restaurants加入userId欄位,並指定為FK,先設定為允許NULL.
+2.調整現有restaurants對應的userId
+3.修改restaurants的userId為NOT NULL
+
+npx sequelize migration:generate --name add-user-restaurant-relationship
+allowNull: true
+npx sequelize db:migrate
+
+關閉Safe Updates
+UPDATE restaurants SET userId = 1;
+
+npx sequelize migration:generate --name alter-restaurant-userId
+allowNull: false
+npx sequelize db:migrate

@@ -1,4 +1,4 @@
-<form class="edit-form" action="/restaurants/{{restaurant.id}}?_method=PUT" method="POST">
+<form class="edit-form" action="/users/restaurant/{{restaurant.id}}?_method=PUT" method="POST">
   {{!-- name --}}
   <div class="edit-div">
     <label class="edit-label" for="name">餐廳名稱</label>
@@ -70,6 +70,6 @@
   <div class="edit-page-btns">
     <button class="submit-btn" type="submit">提交</button>
     <button class="reset-btn">重置</button>
-    <button class="return-btn">返回</button>
+    <a class="return-btn" href="{{back}}">返回</a>
   </div>
 </form>

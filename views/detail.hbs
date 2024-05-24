@@ -37,3 +37,13 @@
     <td>{{restaurant.description}}</td>
   </tr>
 </table>
+<div class="detail-page-btns">
+  {{#if (and isLoggedIn editBtns)}}
+  <!-- 編輯/刪除 -->
+  <a class="edit-btn" href="/users/restaurant/{{restaurant.id}}/edit">編輯</a>
+  <form class="delete-form" action="/users/restaurant/{{restaurant.id}}?_method=DELETE" method="POST">
+    <button class="delete-btn" type="submit">刪除</button>
+  </form>
+  {{/if}}
+  <a class="return-btn" href="{{back}}">返回</a>
+</div>

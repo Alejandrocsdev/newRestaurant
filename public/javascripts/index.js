@@ -20,23 +20,24 @@ const reset = {}
   // 監聽器: 新增頁面按鈕
   if (createPageBtns) {
     createPageBtns.addEventListener('click', onCreatePage)
+    customInputMessage(createInput)
   }
   // 監聽器: 編輯頁面按鈕
   if (editPageBtns) {
     value('original')
     editPageBtns.addEventListener('click', onEditPage)
+    customInputMessage(editInput)
   }
   // 監聽器: 登入/註冊 彈跳窗 開
-  sign.addEventListener('click', onOpenModal)
+  if (sign) {
+    sign.addEventListener('click', onOpenModal)
+  }
 })()
 
 // 監聽器函式: 新增頁面按鈕
 function onCreatePage(event) {
   const target = event.target
-  if (target.classList.contains('return-btn')) {
-    event.preventDefault()
-    window.location.href = `${BASE_URL}/restaurants`
-  } else if (target.classList.contains('reset-btn')) {
+  if (target.classList.contains('reset-btn')) {
     event.preventDefault()
     createInput.forEach((element) => (element.value = ''))
   }
@@ -45,12 +46,7 @@ function onCreatePage(event) {
 // 監聽器函式: 編輯頁面按鈕
 function onEditPage(event) {
   const target = event.target
-  if (target.classList.contains('return-btn')) {
-    event.preventDefault()
-    const pathname = window.location.pathname
-    const newPath = pathname.replace('/edit', '')
-    window.location.href = `${BASE_URL}${newPath}`
-  } else if (target.classList.contains('reset-btn')) {
+  if (target.classList.contains('reset-btn')) {
     event.preventDefault()
     value('current')
   }
@@ -69,6 +65,14 @@ function onOpenModal(event) {
   // 監聽器: 登入/註冊 彈跳窗 關
   const modalClose = document.querySelector('.modal-close')
   modalClose.addEventListener('click', () => modalBg.classList.add('hide'))
+}
+
+// 自定欄位警示訊息
+function customInputMessage(page) {
+  page.forEach((input) => {
+    input.setAttribute('oninvalid', "setCustomValidity('請填寫此欄位')")
+    input.setAttribute('oninput', "setCustomValidity('')")
+  })
 }
 
 // 儲存初始input值

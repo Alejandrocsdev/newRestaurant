@@ -3,12 +3,8 @@ const router = Router()
 
 const { restaurantsController } = require('../controllers')
 
+// 無須登入: 餐廳資訊
 router.get('/', restaurantsController.getAllRestaurants)
-router.get('/create', restaurantsController.renderCreatePage)
-router.get('/:id/edit', restaurantsController.renderEditPage)
 router.get('/:id', restaurantsController.getRestaurant)
-router.post('/create', restaurantsController.createRestaurant)
-router.put('/:id', restaurantsController.updateRestaurant)
-router.delete('/:id', restaurantsController.deleteRestaurant)
 
 module.exports = router
