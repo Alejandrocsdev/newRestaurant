@@ -1,11 +1,49 @@
+const bcrypt = require('bcrypt')
+
 const { usersService, restaurantsService } = require('../services')
 
-const { returnPage } = require('../utils')
+const { returnPage, redirection } = require('../utils')
 
 class UsersController {
-  register(req, res, next) {
-    res.send('register')
+  // 註冊
+  async register(req, res, next) {
+    try {
+      // 導向頁面
+      const path = redirection(req.headers.referer)
+      // 宣告表單資料
+      const { username, email, password, rePassword } = req.body
+      // 檢查資料是否缺少
+      if (!username || !email || !password || !rePassword) {
+        req.flash('error', '缺少必填資料')
+        return res.redirect(path)
+      }
+      if (password !== rePassword) {
+        req.flash('error', '密碼與確認密碼不相符')
+        return res.redirect(path)
+      }
+      if (username !== password) {
+        req.flash('error', '帳號不可與密碼相同')
+        return res.redirect(path)
+      }
+      const saltRounds = 10
+      const hashedPassword = await bcrypt.hash(password, saltRounds)
+      // 根據表單資料新增餐廳
+      await usersService.create({ username, email, password: hashedPassword })
+      // 成功訊息
+      req.flash('success', '註冊成功')
+      // 註冊完開啟登入彈跳窗
+      req.session.login = true
+      // 發送回應
+      // console.log('\n', 'after register', '\n')
+      res.redirect(path)
+    } catch (error) {
+      // 訊息處理中間件
+      error.errorMessage = '註冊失敗'
+      // 錯誤處理中間件
+      next(error)
+    }
   }
+
   // 渲染會員頁面
   async renderProfile(req, res, next) {
     try {
@@ -15,7 +53,7 @@ class UsersController {
       const user = await usersService.getById(userId)
       // 檢查用戶是否存在
       if (!user) {
-        req.flash('error', '查無用戶}')
+        req.flash('error', '查無用戶')
         return res.redirect('/restaurants')
       }
       // 取得餐廳資訊(有可能會沒有)

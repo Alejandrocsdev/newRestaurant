@@ -7,8 +7,14 @@ const helpers = {
   // 接受兩個值
   and: (a, b) => a && b,
   // 餐廳頁面(會員)路徑
-  users: (editBtns) => (editBtns ? '/users/restaurant/' : '/restaurants/')
+  users: (editBtns) => (editBtns ? '/users/restaurant/' : '/restaurants/'),
+  // 登入彈跳窗(背景)
+  loginModal: (login) => login ? 'loginModal' : 'hide'
 }
+// NOTE: 
+// createButton: function (text, url) {
+//   return new Handlebars.SafeString(`<a href="${url}" class="btn">${text}</a>`);
+// }
 
 function redirection(referer) {
   const url = new URL(referer)
@@ -33,6 +39,7 @@ function nonProtectedRoute(req) {
   if (method === 'GET' && path === '/restaurants') return true
   if (method === 'GET' && path.startsWith('/restaurants') && (page || search)) return true
   if (method === 'GET' && /^\/restaurants\/\d+$/.test(path)) return true
+  if (method === 'POST' && path === '/users/register') return true
 
   return false
 }

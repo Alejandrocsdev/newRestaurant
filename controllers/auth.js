@@ -1,7 +1,11 @@
+const { usersService } = require('../services')
+
 const { redirection } = require('../utils')
 
 class AuthController {
+  // 登入
   login(req, res, next) {
+    // 導向頁面
     const path = redirection(req.headers.referer)
 
     return (error, user, info) => {
@@ -17,7 +21,9 @@ class AuthController {
     }
   }
 
+  // 登出
   logout(req, res, next) {
+    // 導向頁面
     const path = redirection(req.headers.referer)
 
     req.logout((error) => {
@@ -29,6 +35,7 @@ class AuthController {
       res.redirect(path)
     })
   }
+
 }
 
 module.exports = new AuthController()

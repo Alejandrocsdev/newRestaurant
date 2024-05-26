@@ -6,6 +6,9 @@ class RestaurantsController {
   // 取得全部餐廳資訊
   async getAllRestaurants(req, res, next) {
     try {
+      // 開啟登入彈跳窗
+      const login = req.session.login || false
+      if (login) req.session.login = false
       // 搜尋關鍵字
       const keyword = req.query.search || ''
       // 當前頁數
@@ -39,7 +42,8 @@ class RestaurantsController {
         last: totalPages,
         paginator,
         page,
-        keyword
+        keyword,
+        login
       })
     } catch (error) {
       // 錯誤處理中間件
@@ -49,6 +53,10 @@ class RestaurantsController {
   // 取得單間餐廳資訊
   async getRestaurant(req, res, next) {
     try {
+      // 開啟登入彈跳窗
+      const login = req.session.login || false
+      if (login) req.session.login = false
+      
       // 返回頁面
       let back = returnPage(req.headers.referer)
       if (/^\/restaurants\/\d+$/.test(back)) back = '/restaurants'
@@ -66,7 +74,7 @@ class RestaurantsController {
         return res.redirect('back')
       }
       // 發送回應
-      res.render('detail', { restaurant, back, previous, next })
+      res.render('detail', { restaurant, back, previous, next, login })
     } catch (error) {
       // 錯誤處理中間件
       next(error)

@@ -17,6 +17,8 @@ const BASE_URL = window.location.origin
 const reset = {}
 
 ;(function init() {
+  // 開啟登入彈跳窗(註冊後)
+  openLoginModal()
   // 監聽器: 新增頁面按鈕
   if (createPageBtns) {
     createPageBtns.addEventListener('click', onCreatePage)
@@ -33,6 +35,18 @@ const reset = {}
     sign.addEventListener('click', onOpenModal)
   }
 })()
+
+function openLoginModal() {
+  if (modalBg.classList.contains('loginModal')) {
+    modal.innerHTML = createModal('登入')
+    // 監聽器: 登入/註冊 彈跳窗 關
+    const modalClose = document.querySelector('.modal-close')
+    modalClose.addEventListener('click', () => {
+      modalBg.classList.add('hide')
+      modalBg.classList.remove('loginModal')
+    })
+  }
+}
 
 // 監聽器函式: 新增頁面按鈕
 function onCreatePage(event) {
@@ -89,14 +103,14 @@ function value(type) {
 
 // 新增: 彈跳窗HTML字串
 function createModal(name) {
-  const path = name === '註冊' ? 'register' : 'login'
-  return `<form class="modal-form" action="/auth/${path}" method="POST">
+  const path = name === '註冊' ? '/users/register' : '/auth/login'
+  return `<form class="modal-form" action="${path}" method="POST">
     <button class="modal-close" type="button">X</button>
     <h1 class="modal-name">${name}</h1>
     ${createLabeledInput('username', '帳號')}
     ${name === '註冊' ? createLabeledInput('email', '信箱') : ''}
     ${createLabeledInput('password', '密碼', 'password')}
-    ${name === '註冊' ? createLabeledInput('re-password', '確認密碼', 'password') : ''}
+    ${name === '註冊' ? createLabeledInput('rePassword', '確認密碼', 'password') : ''}
     <button class="modal-submit" type="submit">提交</button>
   </form>`
 }
