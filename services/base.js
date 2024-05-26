@@ -22,6 +22,11 @@ class Service {
     return db[this.model].findOne({ attributes: this.attributes, where: data, raw: true })
   }
 
+  async getAllIds() {
+    const allIds = await db[this.model].findAll({ attributes: ['id'], raw: true })
+    return allIds.map((row) => row.id)
+  }
+
   create(body) {
     return db[this.model].create(body)
   }

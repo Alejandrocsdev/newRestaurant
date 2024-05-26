@@ -6,8 +6,6 @@ class RestaurantsController {
   // 取得全部餐廳資訊
   async getAllRestaurants(req, res, next) {
     try {
-      // 登入狀態
-      const isLoggedIn = res.locals.isLoggedIn || false
       // 搜尋關鍵字
       const keyword = req.query.search || ''
       // 當前頁數
@@ -22,6 +20,10 @@ class RestaurantsController {
       const restaurants = keyword ? restaurantsService.getMatched(keyword) : data.rows
       // 總餐廳數
       const totalDatas = keyword ? restaurants.length : data.count
+      // 廳數索引
+      req.session.index = keyword
+        ? restaurants.map((restauants) => restauants.id)
+        : await restaurantsService.getAllIds()
       // 全部頁數
       const totalPages = Math.ceil(totalDatas / limit)
       // 最大顯示頁數
@@ -37,8 +39,7 @@ class RestaurantsController {
         last: totalPages,
         paginator,
         page,
-        keyword,
-        isLoggedIn
+        keyword
       })
     } catch (error) {
       // 錯誤處理中間件
@@ -49,20 +50,23 @@ class RestaurantsController {
   async getRestaurant(req, res, next) {
     try {
       // 返回頁面
-      const back = returnPage(req.headers.referer)
-      // 登入狀態
-      const isLoggedIn = res.locals.isLoggedIn || false
+      let back = returnPage(req.headers.referer)
+      if (/^\/restaurants\/\d+$/.test(back)) back = '/restaurants'
       // 取得參數id
       const id = req.params.id
       // 取得單間餐廳
       const restaurant = await restaurantsService.getById(id)
+      // 當前全部餐廳索引
+      const index = req.session.index
+      const previous = restaurantsService.getIdbyIndex(id, index, 'previous')
+      const next = restaurantsService.getIdbyIndex(id, index, 'next')
       // 檢查餐廳是否存在
       if (!restaurant) {
         req.flash('error', '查無此餐廳}')
         return res.redirect('back')
       }
       // 發送回應
-      res.render('detail', { restaurant, isLoggedIn, back })
+      res.render('detail', { restaurant, back, previous, next })
     } catch (error) {
       // 錯誤處理中間件
       next(error)

@@ -1,7 +1,7 @@
 <div class="detail-main-container">
-  {{!-- {{#if first}} --}}
-  <a href="{{previos}}" class="previous-detail"><i class="fa-solid fa-arrow-left"></i></a>
-  {{!-- {{/if}} --}}
+  {{#if previous}}
+  <a href="/restaurants/{{previous}}" class="previous-detail"><i class="fa-solid fa-arrow-left"></i></a>
+  {{/if}}
   <div class="detail-container">
     <div class="detail-img">
       <img src="{{restaurant.image}}">
@@ -53,7 +53,7 @@
       <a class="return-btn" href="{{back}}">返回</a>
     </div>
   </div>
-  {{!-- {{#if last}} --}}
-  <a href="{{next}}" class="next-detail"><i class="fa-solid fa-arrow-right"></i></a>
-  {{!-- {{/if}} --}}
+  {{#if next}}
+  <a href="{{users editBtns}}{{next}}" class="next-detail"><i class="fa-solid fa-arrow-right"></i></a>
+  {{/if}}
 </div>

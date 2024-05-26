@@ -49,6 +49,20 @@ class RestaurantsService extends Service {
     }
     return paginator
   }
+
+  getIdbyIndex(id, index, type) {
+    if (!index) return null
+    const currentIndex = index.indexOf(Number(id))
+    if (type === 'previous') {
+      const previousIndex = currentIndex - 1 >= 0 ? currentIndex - 1 : null
+      const previous = previousIndex !== null ? index[previousIndex] : null
+      return previous
+    } else {
+      const nextIndex = currentIndex + 1 < index.length ? currentIndex + 1 : null
+      const next = nextIndex !== null ? index[nextIndex] : null
+      return next
+    }
+  }
 }
 
 module.exports = new RestaurantsService()

@@ -20,6 +20,8 @@ class UsersController {
       }
       // 取得餐廳資訊(有可能會沒有)
       const restaurants = await restaurantsService.getAll({ userId })
+      // 廳數索引
+      req.session.index = restaurants.map((restauants) => restauants.id)
       // 發送回應
       res.render('profile', { user, restaurants })
     } catch (error) {
@@ -32,10 +34,8 @@ class UsersController {
     try {
       // 返回頁面
       const back = returnPage(req.headers.referer)
-      // 登入狀態
-      const isLoggedIn = res.locals.isLoggedIn || false
       // 發送回應
-      res.render('create', { isLoggedIn, back })
+      res.render('create', { back })
     } catch (error) {
       // 錯誤處理中間件
       next(error)
@@ -46,14 +46,12 @@ class UsersController {
     try {
       // 返回頁面
       const back = returnPage(req.headers.referer)
-      // 登入狀態
-      const isLoggedIn = res.locals.isLoggedIn || false
       // 取得餐廳ID
       const id = req.params.id
       // 取得單間餐廳
       const restaurant = await restaurantsService.getById(id)
       // 發送回應
-      res.render('edit', { restaurant, isLoggedIn, back })
+      res.render('edit', { restaurant, back })
     } catch (error) {
       // 錯誤處理中間件
       next(error)
@@ -63,10 +61,9 @@ class UsersController {
   async renderUserRestaurant(req, res, next) {
     try {
       // 返回頁面
-      const back = returnPage(req.headers.referer)
-      // 登入狀態
-      const isLoggedIn = res.locals.isLoggedIn || false
-      // // 渲染編輯按鈕
+      let back = returnPage(req.headers.referer)
+      if (/^\/users\/restaurant\/\d+$/.test(back)) back = '/users/profile'
+      // 渲染編輯按鈕
       const editBtns = true
       // 用戶ID
       const userId = req.user.id
@@ -74,6 +71,10 @@ class UsersController {
       const id = req.params.id
       // 取得單間餐廳
       const restaurant = await restaurantsService.getById(id)
+      // 當前全部餐廳索引
+      const index = req.session.index
+      const previous = restaurantsService.getIdbyIndex(id, index, 'previous')
+      const next = restaurantsService.getIdbyIndex(id, index, 'next')
       // 檢查餐廳是否存在
       if (!restaurant) {
         req.flash('error', '查無餐廳')
@@ -84,7 +85,7 @@ class UsersController {
         return res.redirect('/restaurants')
       }
       // 發送回應
-      res.render('detail', { restaurant, isLoggedIn, editBtns, back })
+      res.render('detail', { restaurant, editBtns, back, previous, next })
     } catch (error) {
       // 錯誤處理中間件
       next(error)

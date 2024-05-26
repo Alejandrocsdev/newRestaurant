@@ -5,7 +5,9 @@ const helpers = {
   // 分頁按鈕點擊樣式
   clicked: (page, value) => (page === value ? 'clicked' : ''),
   // 接受兩個值
-  and: (a, b) => a && b
+  and: (a, b) => a && b,
+  // 餐廳頁面(會員)路徑
+  users: (editBtns) => (editBtns ? '/users/restaurant/' : '/restaurants/')
 }
 
 function redirection(referer) {
@@ -31,7 +33,7 @@ function nonProtectedRoute(req) {
   if (method === 'GET' && path === '/restaurants') return true
   if (method === 'GET' && path.startsWith('/restaurants') && (page || search)) return true
   if (method === 'GET' && /^\/restaurants\/\d+$/.test(path)) return true
-  
+
   return false
 }
 
