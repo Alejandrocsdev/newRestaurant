@@ -27,6 +27,10 @@ class Service {
     return allIds.map((row) => row.id)
   }
 
+  checkExist(data) {
+    return db[this.model].count({ where: data })
+  }
+
   create(body) {
     return db[this.model].create(body)
   }
