@@ -50,4 +50,4 @@ app.use(router)
 // Error handler middleware (should be the last one)
 app.use(errorHandler)
 // Start the server and listen on the specified port
-app.listen(port, () => console.log(`http://localhost:${port}`))
+app.listen(port, () => console.log(`http://localhost:${port}/restaurants`))
