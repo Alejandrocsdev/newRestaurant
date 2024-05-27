@@ -95,28 +95,28 @@
    ```
 9. 預設帳號資訊：
 
-   1. 帳號: user1
+   1. 名稱: null
+
+      信箱: user1@example.com
 
       密碼: 12345678
-
-      信箱: user1@gmail.com
 
       餐廳: 1, 2, 3
 
-   2. 帳號: user2
+   2. 名稱: null
+
+      信箱: user2@example.com
 
       密碼: 12345678
 
-      信箱: user2@gmail.com
-
       餐廳: 4, 5, 6
 
-   3. 帳號: alex1234
+   2. 名稱: alex
+
+      信箱: alex@gmail.com
 
       密碼: alex5678
 
-      信箱: alex@gmail.com
-      
       餐廳: 7, 8
 
 ## 開發工具

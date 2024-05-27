@@ -3,18 +3,18 @@
     "id": 1,
     "name": "",
     "email": "user1@example.com",
-    "password": "$2b$10$8ATEoZNF/cD2MTQRKGrlL.jAfoqFeX2cUOJEWXC1MJMLhIIuwg6wC"
+    "password": "$2b$10$UWUDKlAu4mMksiU/NXq6Hea6x2ThAAhL16MD7BA3AwWz6XBmydvH2"
   },
   {
     "id": 2,
     "name": "",
     "email": "user2@example.com",
-    "password": "$2b$10$8ATEoZNF/cD2MTQRKGrlL.jAfoqFeX2cUOJEWXC1MJMLhIIuwg6wC"
+    "password": "$2b$10$UWUDKlAu4mMksiU/NXq6Hea6x2ThAAhL16MD7BA3AwWz6XBmydvH2"
   },
   {
     "id": 3,
-    "name": "",
+    "name": "alex",
     "email": "alex@gmail.com",
-    "password": "$2b$10$jxzhPUHX6CtxU.rCp/IvVu3zlNzCt0awJVqgW4mqjQgHqVN7R7VfC"
+    "password": "$2b$10$oDRWs100fV2hZvuYOLOCXufL4Hw3LC8rM9XhbzVPRcyaxMbhwuEf6"
   }
 ]
