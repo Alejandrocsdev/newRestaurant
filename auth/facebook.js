@@ -14,13 +14,12 @@ const config = {
 const verifyCallback = async (accessToken, refreshToken, profile, done) => {
   try {
     const email = profile.emails[0].value
-    const username = profile.id
-    // const name = profile.displayName
+    const name = profile.displayName
     let user = await usersService.getByData({ email })
     if (user) return done(null, user)
     const randomPwd = Math.random().toString(36).slice(-8)
     const hashedPassword = await bcrypt.hash(randomPwd, 10)
-    user = await usersService.create({ username, email, password: hashedPassword })
+    user = await usersService.create({ name, email, password: hashedPassword })
     done(null, user)
   } catch (error) {
     done(error, null)

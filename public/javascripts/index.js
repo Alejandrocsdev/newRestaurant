@@ -107,8 +107,8 @@ function createModal(name) {
   return `<form class="modal-form" action="${path}" method="POST">
     <button class="modal-close" type="button">X</button>
     <h1 class="modal-name">${name}</h1>
-    ${createLabeledInput('username', '帳號')}
-    ${name === '註冊' ? createLabeledInput('email', '信箱') : ''}
+    ${createLabeledInput('name', '名稱')}
+    ${createLabeledInput('email', '信箱')}
     ${createLabeledInput('password', '密碼', 'password')}
     ${name === '註冊' ? createLabeledInput('rePassword', '確認密碼', 'password') : ''}
     <button class="modal-submit" type="submit">提交</button>

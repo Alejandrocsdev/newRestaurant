@@ -1,19 +1,19 @@
 [
   {
     "id": 1,
-    "username": "user1",
+    "name": "",
     "email": "user1@example.com",
     "password": "$2b$10$8ATEoZNF/cD2MTQRKGrlL.jAfoqFeX2cUOJEWXC1MJMLhIIuwg6wC"
   },
   {
     "id": 2,
-    "username": "user2",
+    "name": "",
     "email": "user2@example.com",
     "password": "$2b$10$8ATEoZNF/cD2MTQRKGrlL.jAfoqFeX2cUOJEWXC1MJMLhIIuwg6wC"
   },
   {
     "id": 3,
-    "username": "alex1234",
+    "name": "",
     "email": "alex@gmail.com",
     "password": "$2b$10$jxzhPUHX6CtxU.rCp/IvVu3zlNzCt0awJVqgW4mqjQgHqVN7R7VfC"
   }

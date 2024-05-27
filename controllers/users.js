@@ -11,14 +11,14 @@ class UsersController {
       // 導向頁面
       const path = redirection(req.headers.referer)
       // 宣告表單資料
-      const { username, email, password, rePassword } = req.body
+      const { name, email, password, rePassword } = req.body
       // 檢查資料是否缺少
-      const exist = await usersService.checkExist({ username })
+      const exist = await usersService.checkExist({ email })
       if (exist > 0) {
         req.flash('error', '已註冊')
         return res.redirect(path)
       }
-      if (!username || !email || !password || !rePassword) {
+      if (!email || !password || !rePassword) {
         req.flash('error', '缺少必填資料')
         return res.redirect(path)
       }
@@ -26,14 +26,10 @@ class UsersController {
         req.flash('error', '密碼與確認密碼不相符')
         return res.redirect(path)
       }
-      if (username === password) {
-        req.flash('error', '帳號不可與密碼相同')
-        return res.redirect(path)
-      }
       // 密碼加密
       const hashedPassword = await bcrypt.hash(password, 10)
       // 根據表單資料新增餐廳
-      await usersService.create({ username, email, password: hashedPassword })
+      await usersService.create({ name, email, password: hashedPassword })
       // 成功訊息
       req.flash('success', '註冊成功')
       // 註冊完開啟登入彈跳窗
