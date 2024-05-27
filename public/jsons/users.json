@@ -8,13 +8,13 @@
   {
     "id": 2,
     "username": "tom1234",
-    "email": "$2b$10$ZNkVjoufVYQVKidJsioSt.DvfHZDK0XISNkNVKo35ovA/iV/zNzOq",
-    "password": "tom5678"
+    "email": "tom@gmail.com",
+    "password": "$2b$10$ZNkVjoufVYQVKidJsioSt.DvfHZDK0XISNkNVKo35ovA/iV/zNzOq"
   },
   {
     "id": 3,
     "username": "sasha1234",
-    "email": "$2b$10$rVbZ2x64adeh9QMzFoJQ7utknsPxxVkEHhYzhD7Ypiu6aMpg/bYBW",
-    "password": "sasha5678"
+    "email": "sasha@gmail.com",
+    "password": "$2b$10$rVbZ2x64adeh9QMzFoJQ7utknsPxxVkEHhYzhD7Ypiu6aMpg/bYBW"
   }
 ]

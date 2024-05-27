@@ -14,8 +14,20 @@ router.post('/login', (req, res, next) => {
   passport.authenticate('local', options, callback)(req, res, next)
 })
 
+// NOTE:
 // router.post('/login', passport.authenticate('local', options))
 
 router.post('/logout', authController.logout)
+
+router.get('/login/facebook', passport.authenticate('facebook', { scope: ['email'] }))
+
+router.get(
+  '/redirect/facebook',
+  passport.authenticate('facebook', {
+    successRedirect: '/restaurants',
+    failureRedirect: '/restaurants',
+    failureFlash: true
+  })
+)
 
 module.exports = router

@@ -56,7 +56,7 @@ class RestaurantsController {
       // 開啟登入彈跳窗
       const login = req.session.login || false
       if (login) req.session.login = false
-      
+
       // 返回頁面
       let back = returnPage(req.headers.referer)
       if (/^\/restaurants\/\d+$/.test(back)) back = '/restaurants'

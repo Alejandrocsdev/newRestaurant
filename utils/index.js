@@ -1,3 +1,5 @@
+// const Handlebars = require('handlebars')
+
 // Handlebars Helpers
 const helpers = {
   // 分頁按鈕關閉樣式
@@ -9,12 +11,15 @@ const helpers = {
   // 餐廳頁面(會員)路徑
   users: (editBtns) => (editBtns ? '/users/restaurant/' : '/restaurants/'),
   // 登入彈跳窗(背景)
-  loginModal: (login) => login ? 'loginModal' : 'hide'
+  loginModal: (login) => (login ? 'loginModal' : 'hide')
+  // facebookLogin: (facebook) => {
+  //   return facebook
+  //     ? new Handlebars.SafeString(`<form action="/auth/login/facebook">
+  //   <button type="submit">Facebook Login</button>
+  // </form>`)
+  //     : ''
+  // }
 }
-// NOTE: 
-// createButton: function (text, url) {
-//   return new Handlebars.SafeString(`<a href="${url}" class="btn">${text}</a>`);
-// }
 
 function redirection(referer) {
   const url = new URL(referer)

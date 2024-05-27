@@ -112,7 +112,13 @@ function createModal(name) {
     ${createLabeledInput('password', '密碼', 'password')}
     ${name === '註冊' ? createLabeledInput('rePassword', '確認密碼', 'password') : ''}
     <button class="modal-submit" type="submit">提交</button>
-  </form>`
+  </form>
+  ${name === '註冊' ? '' : `<form action="/auth/login/facebook" class="facebook-login">
+    <button type="submit">
+      <i class="fa-brands fa-square-facebook"></i>
+      <span>Facebook Login</span>
+    </button>
+  </form>`}`
 }
 
 // 新增: 彈跳窗共用input欄位HTML字串

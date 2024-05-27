@@ -203,6 +203,7 @@ main {
   border: 2px solid #353535;
   border-radius: 15px;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   position: relative;
@@ -246,6 +247,19 @@ main {
   border: 2px solid #353535;
   background-color: #a98467;
   cursor: pointer;
+}
+
+.facebook-login {
+  margin-top: 20px;
+}
+
+.facebook-login button {
+  cursor: pointer;
+}
+
+.facebook-login button i,
+.facebook-login button span {
+  font-size: 20px;
 }
 
 .hide {

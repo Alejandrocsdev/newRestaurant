@@ -31,8 +31,7 @@ class UsersController {
         return res.redirect(path)
       }
       // 密碼加密
-      const saltRounds = 10
-      const hashedPassword = await bcrypt.hash(password, saltRounds)
+      const hashedPassword = await bcrypt.hash(password, 10)
       // 根據表單資料新增餐廳
       await usersService.create({ username, email, password: hashedPassword })
       // 成功訊息
