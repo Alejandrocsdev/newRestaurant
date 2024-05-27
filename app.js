@@ -9,7 +9,8 @@ const methodOverride = require('method-override')
 
 const session = require('express-session')
 const flash = require('connect-flash')
-
+// Load environment variables in development mode
+if (process.env.NODE_ENV === 'development') require('dotenv').config()
 const passport = require('passport')
 const auth = require('./auth')
 
@@ -28,8 +29,6 @@ app.use(express.static('public'))
 app.use(express.urlencoded({ extended: true }))
 // Middleware to support HTTP method overrides (e.g., PUT and DELETE)
 app.use(methodOverride('_method'))
-// Load environment variables in development mode
-if (process.env.NODE_ENV === 'development') require('dotenv').config()
 // Session management middleware
 app.use(
   session({

@@ -1,20 +1,20 @@
 [
   {
     "id": 1,
-    "username": "alex1234",
-    "email": "alex@gmail.com",
-    "password": "$2b$10$wnAvpLxeQreGw8okW3pKUOxI.jc8ScPS1qAw.cf5cILPQGC5FyS3K"
+    "username": "user1",
+    "email": "user1@example.com",
+    "password": "$2b$10$8ATEoZNF/cD2MTQRKGrlL.jAfoqFeX2cUOJEWXC1MJMLhIIuwg6wC"
   },
   {
     "id": 2,
-    "username": "tom1234",
+    "username": "user2",
     "email": "tom@gmail.com",
-    "password": "$2b$10$ZNkVjoufVYQVKidJsioSt.DvfHZDK0XISNkNVKo35ovA/iV/zNzOq"
+    "password": "$2b$10$8ATEoZNF/cD2MTQRKGrlL.jAfoqFeX2cUOJEWXC1MJMLhIIuwg6wC"
   },
   {
     "id": 3,
-    "username": "sasha1234",
-    "email": "sasha@gmail.com",
-    "password": "$2b$10$rVbZ2x64adeh9QMzFoJQ7utknsPxxVkEHhYzhD7Ypiu6aMpg/bYBW"
+    "username": "alex1234",
+    "email": "alex@gmail.com",
+    "password": "$2b$10$jxzhPUHX6CtxU.rCp/IvVu3zlNzCt0awJVqgW4mqjQgHqVN7R7VfC"
   }
 ]

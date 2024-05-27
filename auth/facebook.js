@@ -3,8 +3,6 @@ const bcrypt = require('bcrypt')
 const { Strategy } = require('passport-facebook')
 const { usersService } = require('../services')
 
-if (process.env.NODE_ENV === 'development') require('dotenv').config()
-
 const config = {
   clientID: process.env.FACEBOOK_CLIENT_ID,
   clientSecret: process.env.FACEBOOK_CLIENT_SECRET,
